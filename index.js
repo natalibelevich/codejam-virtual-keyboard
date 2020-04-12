@@ -189,7 +189,7 @@ function handleDownKeyCode(eventCode) {
   if (eventCode === 'ControlLeft') {
     document.addEventListener('keydown', changeLanguage);
   }
-  if (eventCode === 'ShiftLeft' || eventCode === 'ShiftRight') {
+  if (eventCode === 'ShiftLeft' || eventCode === 'ShiftRight' || eventCode === 'CapsLock') {
     changeCase();
   }
   if (eventCode === 'Backspace') {
@@ -229,8 +229,12 @@ document.addEventListener('mouseup', (event) => {
 
 document.addEventListener('keydown', (event) => {
   event.preventDefault();
-  document.querySelector(`.button-${event.code}`).classList.add('button--active');
-  handleDownKeyCode(event.code);
+  const codeButton = document.querySelector(`.button-${event.code}`)
+  if (codeButton) {
+    handleDownKeyCode(event.code);
+    codeButton.classList.add('button--active');
+  }
+
 });
 
 document.addEventListener('keyup', (event) => handleUpKeyCode(event.code));
